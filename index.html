@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekapitulasi & Notulensi TI 25</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="2.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+    
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="2.png" alt="Logo TI 25" class="logo-img">
+                <div class="logo-text">
+                    <h2>Dashboard</h2>
+                    <p>Angkatan TI 25</p>
+                </div>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="menu-item active" data-target="beranda">
+                    <i class="fa-solid fa-house"></i> Beranda
+                </li>
+                <li class="menu-item" data-target="rekapitulasi">
+                    <i class="fa-solid fa-wallet"></i> Rekapitulasi Kas
+                </li>
+                <li class="menu-item" data-target="notulensi">
+                    <i class="fa-solid fa-file-lines"></i> Notulensi Rapat
+                </li>
+                <li class="menu-item" data-target="rincian-output">
+                    <i class="fa-solid fa-chart-pie"></i> Rincian Penggunaan Output Kas
+                </li>
+                <li class="menu-item" data-target="catatan">
+                    <i class="fa-solid fa-note-sticky"></i> Catatan
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <p>Bersama Membangun</p>
+                <p><strong>Angkatan yang Lebih Baik</strong></p>
+            </div>
+        </aside>
+  
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-btn" id="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <div class="topbar-title" id="page-title">Beranda</div>
+                </div>
+                <div class="topbar-user">
+                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Rekapitulasi
+                </div>
+            </header>
+
+            <div class="content-body">
+                
+                <section id="beranda" class="page-section active">              
+                    <div class="dashboard-widget-grid">
+                        <div class="dash-card">
+                            <div class="dash-icon time-icon"><i class="fa-solid fa-clock"></i></div>
+                            <div class="dash-info">
+                                <h4>Jam wib</h4>
+                                <div class="dash-value" id="live-time">Memuat...</div>
+                            </div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-icon date-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div class="dash-info">
+                                <h4>Tanggal</h4>
+                                <div class="dash-value" id="live-date">Memuat...</div>
+                            </div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-icon weather-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+                            <div class="dash-info">
+                                <h4>Cuaca</h4>
+                                <div class="dash-value" id="live-weather">Memuat...</div>
+                            </div>
+                        </div>
+                        <div class="dash-card" id="open-calc-btn" style="cursor: pointer;" title="Buka Kalkulator">
+                            <div class="dash-icon calc-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);"><i class="fa-solid fa-calculator"></i></div>
+                            <div class="dash-info">
+                                <h4>Kalkulator</h4>
+                                <div class="dash-value" style="color: var(--accent-blue); font-size: 14px;">Buka <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-header-center">
+                        <h2>Struktur Angkatan & Kelas</h2>
+                        <p>Teknologi Informasi 25</p>
+                    </div>
+
+                    <!-- Hirarki Angkatan -->
+                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
+                        <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-users" style="color: var(--accent-blue);"></i> Angkatan
+                        </h3>
+                        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 0;">
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon blue"><i class="fa-solid fa-crown"></i></div>
+                                <h4>Ketua</h4>
+                                <p class="name">Adji</p>
+                                <span class="badge blue">Penanggung Jawab Utama</span>
+                            </div>
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon green"><i class="fa-solid fa-user-group"></i></div>
+                                <h4>Wakil</h4>
+                                <p class="name">Abu</p>
+                                <span class="badge green">Pendamping Ketua</span>
+                            </div>
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon purple"><i class="fa-solid fa-file-lines"></i></div>
+                                <h4>Sekretaris</h4>
+                                <div class="name" style="display: flex; flex-direction: column; gap: 4px; font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 14px;">
+                                    <div>Fiky</div>
+                                    <div>Okta</div>
+                                </div>
+                                <span class="badge purple">Administrasi & Notulensi</span>
+                            </div>
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon orange"><i class="fa-solid fa-wallet"></i></div>
+                                <h4>Bendahara</h4>
+                                <div class="name" style="display: flex; flex-direction: column; gap: 4px; font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 14px;">
+                                    <div>Zizi</div>
+                                    <div>Bela</div>
+                                </div>
+                                <span class="badge orange">Keuangan Angkatan</span>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                        
+                        <div class="struct-card">
+                            <div class="card-icon teal"><i class="fa-solid fa-book"></i></div>
+                            <h4>Kelas</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">BENDAHARA A</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Firda</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">BENDAHARA B</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Firman</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">KOSMA A</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Dela</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">KOSMA B</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Reza</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="struct-card">
+                            <div class="card-icon pink"><i class="fa-solid fa-bullhorn"></i></div>
+                            <h4>Penjab Sosmed</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Adin</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Naura</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Alfin</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Najib</p>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                        <div class="struct-card">
+                            <div class="card-icon purple"><i class="fa-solid fa-users-rectangle"></i></div>
+                            <h4>Penjab Forum Belajar</h4>
+                            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 12px; max-height: 280px; overflow-y: auto;">
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Jae</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Daus</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Adit</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Kavin</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Ali</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Afin</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Reja</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Nabila</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Wafiq</div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="struct-card">
+                            <div class="card-icon orange"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h4>Pemateri</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Farel</p>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Materi Data base</span>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Farul</p>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Materi Platform</span>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Ali</p>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Matri Jaringan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note-box" style="margin-top: 24px;">
+                        <div class="note-icon"><i class="fa-solid fa-circle-info"></i></div>
+                        <div class="note-content">
+                            <h4>Catatan Penting:</h4>
+                            <p>• Struktur angkatan ini masih bersifat sementara.</p>
+                            <p>• Dibentuk agar koordinasi angkatan bisa segera berjalan dengan baik.</p>
+                            <p>• Ke depannya, kita akan melakukan evaluasi bersama demi kenyamanan seluruh warga angkatan.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="rekapitulasi" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Rekapitulasi Kas</h2>
+                        <p>Pemasukan dan pengeluaran kas angkatan (Tahun 2026)</p>
+                    </div>
+                    <div id="public-custom-rekapitulasi"></div>
+                </section>
+
+                <section id="notulensi" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Notulensi Rapat</h2>
+                        <p>Dokumentasi agenda dan hasil keputusan rapat angkatan</p>
+                    </div>
+                    <div id="public-custom-notulensi"></div>
+                </section>
+
+                <section id="rincian-output" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Rincian Penggunaan Output Kas</h2>
+                        <p>Laporan transparan penggunaan dana output kas angkatan</p>
+                    </div>
+                    <div id="public-custom-rincian-output"></div>
+
+                    <div class="card-table-container links-section" style="margin-top: 24px;">
+                        <h3>Referensi & Bukti Dokumen</h3>
+                        <ul class="link-list">
+                            <li><i class="fa-solid fa-link"></i> Bukti Saluran Donasi Link: <a href="https://drive.google.com/drive/folders/1rn8ZpoFFfOI3YM-vaQuXUA-7GoT26yOQ?usp=drive_link" target="_blank">Google Drive Bukti Donasi</a></li>
+                            <li><i class="fa-solid fa-link"></i> Note/Struk transportasi Link: <a href="https://drive.google.com/drive/folders/1AU4VkHpcACOmqAmQ7J8z4ClEdNChZUDK?usp=drive_link" target="_blank">Google Drive Struk Transportasi</a></li>
+                            <li><i class="fa-solid fa-link"></i> Pembayaran Iuran TF Link: <a href="https://drive.google.com/drive/folders/1IJL0bDJ0kScP2z2hQ9G5dUnDk0GDeejW?usp=drive_link" target="_blank">Google Drive Bukti TF Iuran</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="catatan" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Catatan & Informasi Angkatan</h2>
+                        <p>Catatan penting dan pengumuman terbaru untuk angkatan</p>
+                    </div>
+                    <div id="public-notes-container" style="display: flex; flex-direction: column; gap: 16px;"></div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

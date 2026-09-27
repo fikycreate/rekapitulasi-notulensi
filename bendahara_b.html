@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Kas Kelas B</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="2.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="login-screen" class="login-overlay">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="2.png" alt="Logo TI 25" class="logo-img">
+                <h2>Login</h2>
+                <p>Bendahara Kelas B</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Password Bendahara-B</label>
+                    <input type="password" id="bendahara-password" placeholder="Masukkan password..." required>
+                </div>
+                <div id="login-error" style="color: #dc2626; font-size: 12px; margin-top: 8px; display: none;">Password salah!</div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 18px; justify-content: center;">Masuk</button>
+            </form>
+            <div style="text-align: center; margin-top: 18px;">
+                <a href="index.html" style="font-size: 13px; color: var(--text-muted); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container" id="app-container" style="display: none;">
+        <main class="main-content" style="width: 100%;">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <div class="topbar-title" style="width: auto;">Input Kas Kls B</div>
+                </div>
+                <div class="topbar-user">
+                    <span><i class="fa-solid fa-user-shield"></i> Bendahara B</span>
+                    <button onclick="handleLogout()" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="card-table-container">
+                    <div class="table-action-bar">
+                        <h3>Tabel Kas Kelas B</h3>
+                        <button class="btn-primary" onclick="openKasModal()"><i class="fa-solid fa-plus"></i> Tambah Data</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="kas-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center;">NO</th>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center;">NAMA</th>
+                                    <th>Sep</th>
+                                    <th colspan="4">Oktober</th>
+                                    <th colspan="5">November</th>
+                                    <th colspan="4">Desember</th>
+                                    <th colspan="2">Jan</th>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center;">SUBTOTAL</th>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center;">AKSI</th>
+                                </tr>
+                                <tr>
+                                    <th>17</th>
+                                    <th>4</th><th>11</th><th>18</th><th>25</th>
+                                    <th>1</th><th>8</th><th>15</th><th>22</th><th>29</th>
+                                    <th>6</th><th>13</th><th>20</th><th>27</th>
+                                    <th>3</th><th>10</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kas-tbody"></tbody>
+                            <tfoot>
+                                <tr style="background: #f8fafc; font-weight: bold;">
+                                    <td colspan="2" style="text-align: right;">TOTAL</td>
+                                    <td id="col-total-0">Rp 0</td>
+                                    <td id="col-total-1">Rp 0</td>
+                                    <td id="col-total-2">Rp 0</td>
+                                    <td id="col-total-3">Rp 0</td>
+                                    <td id="col-total-4">Rp 0</td>
+                                    <td id="col-total-5">Rp 0</td>
+                                    <td id="col-total-6">Rp 0</td>
+                                    <td id="col-total-7">Rp 0</td>
+                                    <td id="col-total-8">Rp 0</td>
+                                    <td id="col-total-9">Rp 0</td>
+                                    <td id="col-total-10">Rp 0</td>
+                                    <td id="col-total-11">Rp 0</td>
+                                    <td id="col-total-12">Rp 0</td>
+                                    <td id="col-total-13">Rp 0</td>
+                                    <td id="col-total-14">Rp 0</td>
+                                    <td id="col-total-15">Rp 0</td>
+                                    <td id="grand-total" style="color: #1d4ed8;">Rp 0</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-container" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-title">Tambah Data Kas</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="kas-form" onsubmit="saveKasData(event)">
+                <div class="form-inputs-grid">
+                    <div class="form-group">
+                        <label>No</label>
+                        <input type="number" id="input-no" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" id="input-nama" required>
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin-top: 20px;">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

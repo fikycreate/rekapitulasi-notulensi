@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="2.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="login-screen" class="login-overlay">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="2.png" alt="Logo TI 25" class="logo-img">
+                <h2>Login Admin</h2>
+                <p>Monitor Dashboard TI 25</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Password Admin</label>
+                    <input type="password" id="admin-password" placeholder="Masukkan password admin..." required>
+                </div>
+                <div id="login-error" style="color: #dc2626; font-size: 12px; margin-top: 8px; display: none;">Password salah! Silakan coba lagi.</div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 18px; justify-content: center;">Masuk</button>
+            </form>
+            <div style="text-align: center; margin-top: 18px;">
+                <a href="index.html" style="font-size: 13px; color: var(--text-muted); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Public</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container" id="app-container" style="display: none;">
+   
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="2.png" alt="Logo TI 25" class="logo-img">
+                <div class="logo-text">
+                    <h2>Dashboard</h2>
+                    <p>Admin Angkatan TI 25</p>
+                </div>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="menu-item active" data-target="beranda">
+                    <i class="fa-solid fa-house"></i> Beranda
+                </li>
+                <li class="menu-item" data-target="rekapitulasi">
+                    <i class="fa-solid fa-wallet"></i> Rekapitulasi Kas
+                </li>
+                <li class="menu-item" data-target="input-kas-a">
+                    <i class="fa-solid fa-coins"></i> Input Kas Kelas A
+                </li>
+                <li class="menu-item" data-target="input-kas-b">
+                    <i class="fa-solid fa-coins"></i> Input Kas Kelas B
+                </li>
+                <li class="menu-item" data-target="notulensi">
+                    <i class="fa-solid fa-file-lines"></i> Notulensi Rapat
+                </li>
+                <li class="menu-item" data-target="rincian-output">
+                    <i class="fa-solid fa-chart-pie"></i> Rincian Penggunaan Output Kas
+                </li>
+                <li class="menu-item" data-target="catatan">
+                    <i class="fa-solid fa-note-sticky"></i> Catatan
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <p>Bersama Membangun</p>
+                <p><strong>Angkatan yang Lebih Baik</strong></p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-btn" id="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <div class="topbar-title" id="page-title">Beranda</div>
+                </div>
+                <div class="topbar-user">
+                    <span style="display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-user-shield"></i> Admin TI 25</span>
+                    <button onclick="handleLogout()" class="btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+                </div>
+            </header>
+
+            <div class="content-body">
+
+               
+                <section id="beranda" class="page-section active">
+                    <div class="dashboard-widget-grid">
+                        <div class="dash-card">
+                            <div class="dash-icon time-icon"><i class="fa-solid fa-clock"></i></div>
+                            <div class="dash-info">
+                                <h4>Jam wib</h4>
+                                <div class="dash-value" id="live-time">--:--:--</div>
+                            </div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-icon date-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div class="dash-info">
+                                <h4>Tanggal</h4>
+                                <div class="dash-value" id="live-date">-- -- ----</div>
+                            </div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-icon weather-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+                            <div class="dash-info">
+                                <h4>Cuaca</h4>
+                                <div class="dash-value" id="live-weather">Memuat...</div>
+                            </div>
+                        </div>
+                        <div class="dash-card" id="open-calc-btn" style="cursor: pointer;" title="Buka Kalkulator">
+                            <div class="dash-icon calc-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);"><i class="fa-solid fa-calculator"></i></div>
+                            <div class="dash-info">
+                                <h4>Kalkulator</h4>
+                                <div class="dash-value" style="color: var(--accent-blue); font-size: 14px;">Buka <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-header-center">
+                        <h2>Struktur Angkatan & Kelas</h2>
+                        <p>Teknologi Informasi 25</p>
+                    </div>
+
+                  
+                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
+                        <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-users" style="color: var(--accent-blue);"></i> Angkatan
+                        </h3>
+                        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 0;">
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon blue"><i class="fa-solid fa-crown"></i></div>
+                                <h4>Ketua</h4>
+                                <p class="name">Adji</p>
+                                <span class="badge blue">Penanggung Jawab Utama</span>
+                            </div>
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon green"><i class="fa-solid fa-user-group"></i></div>
+                                <h4>Wakil</h4>
+                                <p class="name">Abu</p>
+                                <span class="badge green">Pendamping Ketua</span>
+                            </div>
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon purple"><i class="fa-solid fa-file-lines"></i></div>
+                                <h4>Sekretaris</h4>
+                                <div class="name" style="display: flex; flex-direction: column; gap: 4px; font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 14px;">
+                                    <div>Fiky</div>
+                                    <div>Okta</div>
+                                </div>
+                                <span class="badge purple">Administrasi & Notulensi</span>
+                            </div>
+                            <div class="struct-card" style="margin-bottom: 0;">
+                                <div class="card-icon orange"><i class="fa-solid fa-wallet"></i></div>
+                                <h4>Bendahara</h4>
+                                <div class="name" style="display: flex; flex-direction: column; gap: 4px; font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 14px;">
+                                    <div>Zizi</div>
+                                    <div>Bela</div>
+                                </div>
+                                <span class="badge orange">Keuangan Angkatan</span>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                       
+                        <div class="struct-card">
+                            <div class="card-icon teal"><i class="fa-solid fa-book"></i></div>
+                            <h4>Kelas</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">BENDAHARA A</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Firda</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">BENDAHARA B</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Firman</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">KOSMA A</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Dela</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">KOSMA B</span>
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Reza</p>
+                                </div>
+                            </div>
+                        </div>
+
+                
+                        <div class="struct-card">
+                            <div class="card-icon pink"><i class="fa-solid fa-bullhorn"></i></div>
+                            <h4>Penjab Sosmed</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Adin</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Naura</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Alfin</p>
+                                </div>
+                                <div style="background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Najib</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Penjab Forum Belajar -->
+                        <div class="struct-card">
+                            <div class="card-icon purple"><i class="fa-solid fa-users-rectangle"></i></div>
+                            <h4>Penjab Forum Belajar</h4>
+                            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 12px; max-height: 280px; overflow-y: auto;">
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Jae</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Daus</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Adit</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Kavin</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Ali</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Afin</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Reja</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Nabila</div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 13px; font-weight: 600; color: #0f172a;">Wafiq</div>
+                            </div>
+                        </div>
+
+                        <!-- Pemateri -->
+                        <div class="struct-card">
+                            <div class="card-icon orange"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h4>Pemateri</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Farel</p>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Materi Data base</span>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Farul</p>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Materi Platform</span>
+                                </div>
+                                <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <p style="font-size: 14px; font-weight: 600; color: #0f172a;">Ali</p>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Matri Jaringan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note-box" style="margin-top: 24px;">
+                        <div class="note-icon"><i class="fa-solid fa-circle-info"></i></div>
+                        <div class="note-content">
+                            <h4>Catatan Penting:</h4>
+                            <p>• Struktur angkatan ini masih bersifat sementara.</p>
+                            <p>• Dibentuk agar koordinasi angkatan bisa segera berjalan dengan baik.</p>
+                            <p>• Ke depannya, kita akan melakukan evaluasi bersama demi kenyamanan seluruh warga angkatan.</p>
+                        </div>
+                    </div>
+                </section>
+
+             
+                <section id="rekapitulasi" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Rekapitulasi Kas</h2>
+                        <p>Pemasukan dan pengeluaran kas angkatan (Tahun 2026)</p>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <button class="btn-primary" onclick="openCreateTableModal('rekapitulasi')"><i class="fa-solid fa-table"></i> Buat Tabel Manual Baru</button>
+                    </div>
+                    <div id="container-custom-rekapitulasi"></div>
+                </section>
+
+               
+                <section id="input-kas-a" class="page-section">
+                    <div class="card-table-container">
+                        <div class="table-action-bar">
+                            <h3>Tabel Kas Kelas A</h3>
+                            <button class="btn-primary" onclick="openAdminKasModal('kas_kelas_a')"><i class="fa-solid fa-plus"></i> Tambah Data</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="kas-table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">NO</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">NAMA</th>
+                                        <th>Sep</th>
+                                        <th colspan="4">Oktober</th>
+                                        <th colspan="5">November</th>
+                                        <th colspan="4">Desember</th>
+                                        <th colspan="2">Jan</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">SUBTOTAL</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">AKSI</th>
+                                    </tr>
+                                    <tr>
+                                        <th>17</th>
+                                        <th>4</th><th>11</th><th>18</th><th>25</th>
+                                        <th>1</th><th>8</th><th>15</th><th>22</th><th>29</th>
+                                        <th>6</th><th>13</th><th>20</th><th>27</th>
+                                        <th>3</th><th>10</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-kas-a-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                
+                <section id="input-kas-b" class="page-section">
+                    <div class="card-table-container">
+                        <div class="table-action-bar">
+                            <h3>Tabel Kas Kelas B</h3>
+                            <button class="btn-primary" onclick="openAdminKasModal('kas_kelas_b')"><i class="fa-solid fa-plus"></i> Tambah Data</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="kas-table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">NO</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">NAMA</th>
+                                        <th>Sep</th>
+                                        <th colspan="4">Oktober</th>
+                                        <th colspan="5">November</th>
+                                        <th colspan="4">Desember</th>
+                                        <th colspan="2">Jan</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">SUBTOTAL</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">AKSI</th>
+                                    </tr>
+                                    <tr>
+                                        <th>17</th>
+                                        <th>4</th><th>11</th><th>18</th><th>25</th>
+                                        <th>1</th><th>8</th><th>15</th><th>22</th><th>29</th>
+                                        <th>6</th><th>13</th><th>20</th><th>27</th>
+                                        <th>3</th><th>10</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-kas-b-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+               
+                <section id="notulensi" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Notulensi Rapat</h2>
+                        <p>Dokumentasi agenda dan hasil keputusan rapat angkatan</p>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <button class="btn-primary" onclick="openCreateTableModal('notulensi')"><i class="fa-solid fa-table"></i> Buat Tabel Manual Baru</button>
+                    </div>
+                    <div id="container-custom-notulensi"></div>
+                </section>
+
+                
+                <section id="rincian-output" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Rincian Penggunaan Output Kas</h2>
+                        <p>Laporan transparan penggunaan dana output kas angkatan</p>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <button class="btn-primary" onclick="openCreateTableModal('rincian-output')"><i class="fa-solid fa-table"></i> Buat Tabel Manual Baru</button>
+                    </div>
+                    <div id="container-custom-rincian-output"></div>
+
+                    <div class="card-table-container links-section" style="margin-top: 24px;">
+                        <h3>Referensi & Bukti Dokumen</h3>
+                        <ul class="link-list">
+                            <li><i class="fa-solid fa-link"></i> Bukti Saluran Donasi Link: <a href="https://drive.google.com/drive/folders/1rn8ZpoFFfOI3YM-vaQuXUA-7GoT26yOQ?usp=drive_link" target="_blank">Google Drive Bukti Donasi</a></li>
+                            <li><i class="fa-solid fa-link"></i> Note/Struk transportasi Link: <a href="https://drive.google.com/drive/folders/1AU4VkHpcACOmqAmQ7J8z4ClEdNChZUDK?usp=drive_link" target="_blank">Google Drive Struk Transportasi</a></li>
+                            <li><i class="fa-solid fa-link"></i> Pembayaran Iuran TF Link: <a href="https://drive.google.com/drive/folders/1IJL0bDJ0kScP2z2hQ9G5dUnDk0GDeejW?usp=drive_link" target="_blank">Google Drive Bukti TF Iuran</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="catatan" class="page-section">
+                    <div class="page-header-center">
+                        <h2>Catatan & Informasi Angkatan</h2>
+                        <p>Kelola catatan penting dan pengumuman angkatan</p>
+                    </div>
+
+                    <div class="card-table-container">
+                        <div class="table-action-bar">
+                            <h3>Daftar Catatan</h3>
+                            <button class="btn-primary" onclick="openNoteModal()"><i class="fa-solid fa-plus"></i> Tambah Catatan</button>
+                        </div>
+                        <div id="admin-notes-container" style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;"></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    
+    <div id="modal-create-table" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Buat Tabel Manual Baru</h3>
+                <button class="close-btn" onclick="closeCreateTableModal()">&times;</button>
+            </div>
+            <form onsubmit="handleCreateTableSubmit(event)">
+                <div class="form-inputs-grid">
+                    <div class="form-group">
+                        <label>Judul Tabel</label>
+                        <input type="text" id="custom-table-title" placeholder="Masukkan judul tabel..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Kolom</label>
+                        <input type="number" id="custom-table-cols" min="1" max="10" placeholder="Contoh: 3" oninput="generateHeaderInputs(this.value)" required>
+                    </div>
+                    <div id="custom-headers-container"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeCreateTableModal()">Batal</button>
+                    <button type="submit" class="btn-primary">Buat Tabel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="modal-custom-row" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="custom-row-modal-title">Input Data Baris</h3>
+                <button class="close-btn" onclick="closeCustomRowModal()">&times;</button>
+            </div>
+            <form onsubmit="handleCustomRowSubmit(event)">
+                <div id="custom-row-inputs" class="form-inputs-grid"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeCustomRowModal()">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-note" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="note-modal-title">Tambah Catatan</h3>
+                <button class="close-btn" onclick="closeNoteModal()">&times;</button>
+            </div>
+            <form onsubmit="handleNoteSubmit(event)">
+                <div class="form-inputs-grid">
+                    <div class="form-group">
+                        <label>Judul Catatan</label>
+                        <input type="text" id="note-title" placeholder="Masukkan judul catatan..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Isi Catatan</label>
+                        <textarea id="note-content" rows="4" placeholder="Masukkan isi catatan..." style="padding: 12px 14px; border: 1px solid var(--border-color); border-radius: 10px; font-size: 14px; font-family: inherit; resize: vertical;" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeNoteModal()">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-kas-admin" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="admin-kas-modal-title">Tambah Data Kas</h3>
+                <button class="close-btn" onclick="closeAdminKasModal()">&times;</button>
+            </div>
+            <form id="admin-kas-form" onsubmit="saveAdminKasData(event)">
+                <div class="form-inputs-grid">
+                    <div class="form-group">
+                        <label>No</label>
+                        <input type="number" id="admin-kas-no" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" id="admin-kas-nama" required>
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin-top: 20px;">
+                    <button type="button" class="btn-secondary" onclick="closeAdminKasModal()">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
